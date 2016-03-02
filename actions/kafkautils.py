@@ -20,8 +20,8 @@ def get_zookeepers():
 
 def kafka_is_running():
     s = subprocess.Popen(["ps", "axw"],stdout=subprocess.PIPE)
-    for x in s.stdout:
-        if re.search(process, "/usr/lib/kafka/bin/kafka-server-start.sh"):
+    for line in s.stdout:
+        if re.search(b'/usr/lib/kafka/bin/kafka-server-start.sh', line):
             return True
 
     return False
