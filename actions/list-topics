@@ -16,7 +16,7 @@ if not charm_ready:
     from subprocess import call
     call(['action-fail', 'Kafka service not yet ready'])
 
-if host.service_available('kafka') and host.service_running('kafka'):
+if kafkautils.kafka_is_running():
     zookeepers = kafkautils.get_zookeepers()
     output = utils.run_as('kafka', '/usr/lib/kafka/bin/kafka-topics.sh',
                           '--zookeeper', zookeepers, '--list',

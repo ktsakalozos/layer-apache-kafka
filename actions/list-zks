@@ -16,7 +16,7 @@ if not charm_ready:
     call(['action-fail', 'Kafka service not yet ready'])
     sys.exit(1)
 
-if host.service_available('kafka') and host.service_running('kafka'):
+if kafkautils.kafka_is_running():
     zookeepers = kafkautils.get_zookeepers()
     hookenv.action_set({'zookeepers': zookeepers})
     # hookenv.action_set('outcome', "success")

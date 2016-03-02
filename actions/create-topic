@@ -21,7 +21,7 @@ topic_partitions = hookenv.action_get('partitions')
 topic_replication = hookenv.action_get('replication')
 
 # Create the topic if we've got zookeepers; otherwise fail.
-if host.service_available('kafka') and host.service_running('kafka'):
+if kafkautils.kafka_is_running():
     zookeepers = kafkautils.get_zookeepers()
     output = utils.run_as('kafka', 'kafka-topics.sh',
                           '--zookeeper', zookeepers, '--create',

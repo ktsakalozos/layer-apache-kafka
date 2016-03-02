@@ -1,5 +1,7 @@
 import re
 import yaml
+import subprocess
+
 
 def get_zookeepers():
     with open("dist.yaml", 'r') as distconf:
@@ -15,3 +17,11 @@ def get_zookeepers():
             return zks
 
     return None
+
+def kafka_is_running():
+    s = subprocess.Popen(["ps", "axw"],stdout=subprocess.PIPE)
+    for x in s.stdout:
+        if re.search(process, "/usr/lib/kafka/bin/kafka-server-start.sh"):
+            return True
+
+    return False

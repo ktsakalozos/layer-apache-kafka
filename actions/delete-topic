@@ -21,7 +21,7 @@ if not charm_ready:
 topic_name = hookenv.action_get('topic')
 
 # Delete the topic if we've got zookeepers; otherwise fail.
-if host.service_available('kafka') and host.service_running('kafka'):
+if kafkautils.kafka_is_running():
     zookeepers = kafkautils.get_zookeepers()
     output = utils.run_as('kafka', 'kafka-topics.sh',
                           '--zookeeper', zookeepers, '--delete',
